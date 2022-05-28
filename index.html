@@ -1,0 +1,101 @@
+<!--
+  SPDX-License-Identifier: Jam
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Sewem Ipsum | Sewing related lorem ipsum-like dummy text generator.</title>
+    <meta name="description" content="Sewing related lorem ipsum-like dummy text generator.">
+    <link rel="stylesheet" type="text/css" href="/styles.min.css">
+    <meta name="theme-color" content="#000000">
+    <meta name="referrer-policy" content="noreferrer">
+    <link rel="icon" href="/favicon.png">
+  </head>
+  <body>
+
+    <header>
+      <div>
+        <h1><a href="/" title="Home">Sewem Ipsum</a></h1>
+      </div>
+    </header>
+
+    <nav>
+      <a href="https://github.com/houseofcloth/sewem-ipsum" title="Open Source on GitHub">GitHub</a>
+    </nav>
+
+    <main>
+      <aside>
+        <div>
+          <p><strong><em>Sewem Ipsum</em></strong> is a sewing related <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" title="Lorem Ipsum on Wikipedia" rel="noreferrer" _target="blank">lorem ipsum</a>-like dummy text generator. Created as a little fun <em>(with some possible practical uses)</em> by <a href="https://houseofcloth.com.au" title="House of Cloth" target="_blank" rel="noreferrer">House of Cloth</a>. The possibilites are <em>(almost)</em> endless!</p>
+        </div>
+        <div>
+          <form name="generator">
+            <p>
+              <label><span>Terms:</span>
+                <input type="radio" name="oftype" value="terms">
+              </label>
+            </p>
+            <p>
+              <label><span>Sentences:</span>
+                <input type="radio" name="oftype" value="sentences" checked>
+              </label>
+            </p>
+            <p>
+              <label><span>Paragraphs:</span>
+                <input type="radio" name="oftype" value="paragraphs">
+              </label>
+            </p>
+            <p>
+              <label><span>Quantity:</span>
+                <input type="number" name="terms" value="1" step="1" min="1">
+              </label>
+            </p>
+            <p>
+              <button type="submit">Generate</button>
+            </p>
+          </form>
+        </div>
+      </aside>
+      <section id="result"></section>
+    </main>
+
+    <script src="/sewem-ipsum.min.js"></script>
+    <script>
+      // SPDX-License-Identifier: Jam
+
+      /**
+       * Listen for form submission
+       */
+      document.forms.generator.addEventListener('submit', (e) => {
+        // Stop form submission
+        e.preventDefault()
+        // Get form values
+        const number = e.target.terms.value
+        const oftype = e.target.oftype.value
+        // Where output will go
+        const result = document.querySelector('#result')
+        /**
+         * Generate terms/sentences/paragraphs
+         * The three `get...` functions return an array of values
+         */
+        if (oftype === "terms") {
+          result.innerHTML = `<p>${getTerms(number).join('<br>')}</p>`
+        }
+        else if (oftype === "paragraphs") {
+          result.innerHTML = getParagraphs(number).map(p => `<p>${p}</p>`).join('')
+        }
+        else {
+          result.innerHTML = getSentences(number).map(s => `<p>${s}</p>`).join('')
+        }
+      });
+      /**
+       * Generate random paragraphs on page load
+       */
+      document.addEventListener("DOMContentLoaded", () => {
+        const result = document.querySelector('#result').innerHTML = getParagraphs(5).map(p => `<p>${p}</p>`).join('')
+      });
+    </script>
+  </body>
+</html>

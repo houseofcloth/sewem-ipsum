@@ -7,7 +7,7 @@
 
 [[redirects]]
   from = "/docs"
-  to = "https://github.com/houseocloth/sewem-ipsum#readme"
+  to = "https://github.com/houseofcloth/sewem-ipsum#readme"
   status = 301
 
 [[edge_functions]]

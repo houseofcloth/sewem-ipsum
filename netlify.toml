@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "site"
+
+[dev]
+  command = "npm start"
+
+[[redirects]]
+  from = "/docs"
+  to = "https://github.com/houseocloth/sewem-ipsum#readme"
+  status = 301
+
+[[edge_functions]]
+  path = "/api/v0/*"
+  function = "api"

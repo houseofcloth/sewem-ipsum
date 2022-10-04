@@ -1,0 +1,26 @@
+{
+  "name": "sewem-ipsum",
+  "description": "A lorem ipsum-like dummy text generator full of fabric/sewing/dressmaking terms.",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/houseofcloth/sewem-ipsum.git"
+  },
+  "keywords": [],
+  "author": "House of Cloth",
+  "license": "Jam",
+  "bugs": {
+    "url": "https://github.com/houseofcloth/sewem-ipsum/issues"
+  },
+  "homepage": "https://sew.dye.li",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.2",
+    "clean-css": "^5.3.1",
+    "html-minifier": "^4.0.0"
+  },
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "dev": "ntl dev -o"
+  }
+}

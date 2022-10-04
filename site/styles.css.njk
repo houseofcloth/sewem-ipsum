@@ -1,3 +1,6 @@
+---
+permalink: styles.css
+---
 /*! SPDX-License-Identifier: Jam */
 :root {
   --background: #FAFAFA;
@@ -27,7 +30,9 @@ header div {
 h1 {
   font-size: 1.5rem;
 }
-
+h4 {
+  border-bottom: 2px solid var(--foreground);
+}
 main {
   display: flex;
   flex-direction: row;
@@ -45,10 +50,20 @@ main aside {
   display: block;
   min-width: 300px;
   max-width: 300px;
-  padding-right: 1rem;
+  padding-right: 2rem;
 }
 p {
   line-height: 1.5rem;
+}
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+ul {
+  list-style-type: none;
+  margin: 0 0 0 1rem;
+  padding: 0
 }
 form * {
   font-size: 1.5rem;

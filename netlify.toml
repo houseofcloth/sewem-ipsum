@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "site"
+  publish = "dist"
 
 [dev]
   command = "npm start"

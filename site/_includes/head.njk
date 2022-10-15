@@ -3,8 +3,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   {%if description%}<meta name="description" content="{{ description }}">{%endif%}
   <title>{{ title }} | Sewem Ipsum</title>
-  <link rel="stylesheet" type="text/css" href="/styles.css">
+  {%set css%}
+   {%include 'styles.css'%}
+  {%endset%}
+  <style nonce="ae5d778cb21f">{{ css | cssmin | safe }}</style>
   <meta name="theme-color" content="#0C0C0C">
   <meta name="referrer-policy" content="noreferrer">
+  <meta name="robots" content="index, follow, noarchive, nosnippet, notranslate">
   <link rel="icon" href="/favicon.png">
+  {%if canonical%}<link rel="canonical" href="{{ canonical | safe }}">{%endif%}
 </head>

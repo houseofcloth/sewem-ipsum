@@ -1,0 +1,10 @@
+name = "sewem-ipsum"
+main = "worker/index.mjs"
+compatibility_date = "2022-10-14"
+
+[build]
+  command = "npm run build"
+
+[vars]
+  FAVICON_URL = "..."
+  DOCS_URL = "..."

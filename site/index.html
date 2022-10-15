@@ -1,6 +1,7 @@
 ---
 layout: layouts/default
 title: Sewing related lorem ipsum-like dummy text generator.
+canonical: https://sew.dye.li
 ---
 <main>
   <aside>
@@ -12,17 +13,17 @@ title: Sewing related lorem ipsum-like dummy text generator.
       <form name="generator">
         <p>
           <label><span>Terms:</span>
-            <input type="radio" name="oftype" value="terms">
+            <input type="radio" name="oftype" value="term">
           </label>
         </p>
         <p>
           <label><span>Sentences:</span>
-            <input type="radio" name="oftype" value="sentences" checked>
+            <input type="radio" name="oftype" value="sentence" checked>
           </label>
         </p>
         <p>
           <label><span>Paragraphs:</span>
-            <input type="radio" name="oftype" value="paragraphs">
+            <input type="radio" name="oftype" value="paragraph">
           </label>
         </p>
         <p>
@@ -42,7 +43,7 @@ title: Sewing related lorem ipsum-like dummy text generator.
 <script nonce="ae5d778cb21f">
   // SPDX-License-Identifier: Jam
   
-  const apiBase = "/api/v0"
+  const apiBase = "/api/v1"
 
   /**
    * Listen for form submission
@@ -58,22 +59,17 @@ title: Sewing related lorem ipsum-like dummy text generator.
     /**
      * Generate terms/sentences/paragraphs using API calls
      */
-    let response, output
-    switch(oftype) {
-      case "terms":
-        response = await fetch(`${apiBase}/term?count=${number}`)
-        output = await response.json()
-        break;
-      case "paragraphs":
-        response = await fetch(`${apiBase}/paragraph?count=${number}`)
-        output = await response.json()
-        break;
-      default:
-        response = await fetch(`${apiBase}/sentence?count=${number}`)
-        output = await response.json()
-    }
 
-    result.innerHTML = output.map(o => `<p>${o}</p>`).join('')
+    const response = await fetch(`${apiBase}/${oftype}?count=${number}`)
+
+    if (response.status === 201) {
+      const output = await response.json()
+      result.innerHTML = output.map(o => `<p>${o}</p>`).join('')
+    }
+    else{
+      result.innerHTML = "Error fetching from API."
+    }
+    
   });
   
   /**

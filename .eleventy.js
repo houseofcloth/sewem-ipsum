@@ -4,7 +4,7 @@ const htmlmin = require('html-minifier')
 module.exports = function(eleventyConfig) {
 
   // Copy favicon
-  eleventyConfig.addPassthroughCopy("site/favicon.png")
+  eleventyConfig.addPassthroughCopy("site/*.txt")
 
   // Minify HTML
   // https://www.11ty.dev/docs/config/#transforms-example-minify-html-output
@@ -25,16 +25,10 @@ module.exports = function(eleventyConfig) {
     return content
   })
 
-  // Minify CSS
-  // Modified version of above combined with https://www.11ty.dev/docs/quicktips/inline-css/
-  eleventyConfig.addTransform("cssmin", function(content, outputPath) {
-    if( outputPath && outputPath.endsWith(".css") ) {
-      let minified = new CleanCSS({}).minify(content).styles
-      return minified
-    }
-
-    return content
-  })
+  // Minify CSS https://www.11ty.dev/docs/quicktips/inline-css/
+  eleventyConfig.addFilter("cssmin", function(code) {
+    return new CleanCSS({}).minify(code).styles;
+  });
 
   // Config
   return {

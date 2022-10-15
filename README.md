@@ -41,7 +41,6 @@ Options for this endpoint:
 ##### Examples
 - `{API_BASE}/paragraph` Return a single paragraph.
 - `{API_BASE}/paragraph?count=3` Return three paragraphs.
-</ul>
 
 ## LICENSE
 

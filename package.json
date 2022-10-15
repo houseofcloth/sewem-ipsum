@@ -21,6 +21,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
-    "dev": "ntl dev -o"
+    "publish": "wrangler publish",
+    "dev": "wrangler dev"
   }
 }

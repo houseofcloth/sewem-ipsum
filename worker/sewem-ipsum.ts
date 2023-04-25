@@ -5,9 +5,18 @@
  */
 
 /**
+ * 
+ */
+declare global {
+  interface String {
+    capitalise(): string,
+  }
+}
+
+/**
  * List of sewing/fabric/dressmaking/quilting terms
  */
-const termlist = [
+const termlist: Term[] = [
   "a-line",
   "absorbency",
   "abutted dart",
@@ -311,27 +320,31 @@ const termlist = [
 ]
 
 // Default values
-const defaults = {
-  count_min: 2,
-  count_max: 10,
+const defaults: DefaultOptions = {
+  countMin: 2,
+  countMax: 10,
 }
 
 /**
  * From: https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
  */
-String.prototype.capitalise = function() {
+String.prototype.capitalise = function(): string {
   return this.charAt(0).toUpperCase() + this.slice(1)
 }
 
 /**
  * Generate random number
  */
-const randomCount = (min = defaults.count_min, max = defaults.count_max) => Math.floor(Math.random() * (max - min + 1)) + min
+const randomCount = (
+  min: number = defaults.countMin,
+  max: number = defaults.countMax,
+): number =>
+  Math.floor(Math.random() * (max - min + 1)) + min
 
 /**
  * Get random term from the list
  */
-const randomTerm = () =>
+const randomTerm = (): Term =>
   termlist[
     Math.floor(
       Math.random() * (termlist.length - 1)
@@ -341,10 +354,10 @@ const randomTerm = () =>
 /**
  * Generate a random sentence
  */
-const randomSentence = (opts) =>
+const randomSentence = (opts: Options): Sentence =>
   Array.from(
     { length: randomCount(opts?.tMin, opts?.tMax) },
-    () => randomTerm()
+    (): Term => randomTerm()
   )
   .join(' ')
   .capitalise()
@@ -353,49 +366,50 @@ const randomSentence = (opts) =>
 /**
  * Generate a random paragraph.
  */
-const randomParagraph = (opts) =>
+const randomParagraph = (opts: Options): Paragraph =>
   Array.from(
     { length: randomCount(opts?.sMin, opts?.sMax) },
-    () => randomSentence(opts)
+    (): Sentence => randomSentence(opts)
   )
   .join(' ')
 
 /**
- * 
- * @param {Number} count - Number of terms to return
- * @returns {Array}      - Array of terms
+ * Return (1 or more) terms
  */
-const getTerms = count =>
+const getTerms = (count: number): Array<Term> =>
   Array.from(
     { length: count},
-    () => randomTerm()
+    (): Term => randomTerm()
   )
+
 /**
-* 
-* @param {Number} count - Number of sentences to return
-* @returns {Array}      - Array of sentences, with uppercase first letter and full stop.
-*/
-const getSentences = (count, opts) =>
+ * Return (1 or more) sentences
+ */
+const getSentences = (
+  count: number,
+  opts: Options
+): Array<Sentence> =>
   Array.from(
     { length: (opts?.sMin || opts?.sMax)
         ? randomCount(opts.sMin, opts.sMax)
         : count
     },
-    () => randomSentence(opts)
+    (): Sentence => randomSentence(opts)
   )
+
 /**
-* 
-* @param {Number} count - Number of paragraphs to return
-* @param {Object} opts  - Options
-* @returns {Array}      - Array of paragraphs
-*/
-const getParagraphs = (count, opts) =>
+ * Return (1 or more) paragraphs
+ */
+const getParagraphs = (
+  count: number,
+  opts: Options
+): Array<Paragraph> =>
   Array.from(
     { length: (opts?.pMin || opts?.pMax)
         ? randomCount(opts.pMin, opts.pMax)
         : count
     },
-    () => randomParagraph(opts)
+    (): Paragraph => randomParagraph(opts)
   )
 
 export {

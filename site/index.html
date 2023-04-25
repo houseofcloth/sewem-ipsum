@@ -55,7 +55,7 @@ canonical: https://sew.dye.li
     const number = e.target.terms.value
     const oftype = e.target.oftype.value
     // Where output will go
-    const result = document.querySelector('#result')
+    const resultBox = document.querySelector('#result')
     /**
      * Generate terms/sentences/paragraphs using API calls
      */
@@ -63,11 +63,12 @@ canonical: https://sew.dye.li
     const response = await fetch(`${apiBase}/${oftype}?count=${number}`)
 
     if (response.status === 201) {
-      const output = await response.json()
-      result.innerHTML = output.map(o => `<p>${o}</p>`).join('')
+      const { result } = await response.json()
+      resultBox.innerHTML = result.map(o => `<p>${o}</p>`).join('')
     }
     else{
-      result.innerHTML = "Error fetching from API."
+      const { error } = await response.json()
+      resultBox.innerHTML = error
     }
     
   });
@@ -78,9 +79,13 @@ canonical: https://sew.dye.li
   document.addEventListener("DOMContentLoaded", () => {
     fetch(`${apiBase}/paragraph?count=5`)
       .then(res => res.json())
-      .then(data =>
-        document.querySelector('#result').innerHTML = data.map(p => `<p>${p}</p>`).join('')
-      )
+      .then(data =>{
+        const { result, error } = data
+        if (result)
+          document.querySelector('#result').innerHTML = result.map(p => `<p>${p}</p>`).join('')
+        else
+          document.querySelector('#result').innerHTML = error
+      })
       .catch(e => console.log(e))
   });
 </script>

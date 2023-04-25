@@ -8,17 +8,18 @@
  * - Robots
  * - Documentation redirect
  */
+
 // API router imports
-import apiv0Router from "./api-v0.mjs"
-import apiv1Router from "./api-v1.mjs"
+import apiv0Router from "./api-v0"
+import apiv1Router from "./api-v1"
 
 // Common config imports
-import { endpointHeaders, messages } from "./config"
+import { corsHeaders, messages } from "./config"
 
-// HTML imports
 import homePage from "../dist/index.html"
 import notFoundPage from "../dist/404.html"
 import robotsTXT from "../dist/robots.txt"
+import favIcon from "../dist/favicon.png"
 
 // Headers for HTML pages
 const htmlHeaders = new Headers({
@@ -35,7 +36,10 @@ const htmlHeaders = new Headers({
 
 // Worker
 export default {
-  fetch(req, env, /* ctx */) {
+  fetch(
+    req: Request,
+    env: Environment,
+  ): Response {
 
     // Reject unsupported methods
     if (!['GET','HEAD','OPTIONS'].includes(req.method))
@@ -57,7 +61,14 @@ export default {
 
     // Favicon
     if (pathname === "/favicon.png")
-      return fetch(env.FAVICON_URL)
+      return new Response(favIcon,
+        {
+          headers: {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'public, s-maxage=86400',
+          }
+        }
+      )
 
     // Robots TXT
     if (pathname === "/robots.txt")
@@ -66,7 +77,7 @@ export default {
     // Documentation redirect
     if (pathname === "/docs")
       return new Response(null, {
-        status: 302,
+        status: 307,
         headers: {
           Location: env.DOCS_URL,
           'Referrer-Policy': 'no-referrer',
@@ -79,7 +90,7 @@ export default {
       // Return for OPTIONS
       if (req.method === "OPTIONS")
         return new Response(null, {
-          headers: endpointHeaders
+          headers: corsHeaders
         })
       
       // Check route matching
@@ -99,18 +110,22 @@ export default {
           default:
             // Not a version.
             return new Response(
-              JSON.stringify([messages.api.invalid_version]), {
+              JSON.stringify({ error: messages.invalid_version }), {
                 status: 400,
                 headers: {
                   'Content-Type': 'application/json',
-                  ...endpointHeaders
+                  ...corsHeaders
                 }
               }
             )
         }
       }
+      
       //
-      return new Response(messages.api.invalid_request, { status: 400 })
+      return new Response(
+        JSON.stringify({ error: messages.invalid_request }),
+        { status: 400 }
+      )
     }
       
     // Serve 404 page

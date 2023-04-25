@@ -1,10 +1,13 @@
 name = "sewem-ipsum"
-main = "worker/index.mjs"
-compatibility_date = "2022-10-14"
+main = "worker/index.ts"
+compatibility_date = "2023-04-21"
+
+rules = [
+  { type = "Data", globs = ["**/*.png"], fallthrough = true },
+]
 
 [build]
   command = "npm run build"
 
 [vars]
-  FAVICON_URL = "..."
-  DOCS_URL = "..."
+  DOCS_URL = "https://github.com/houseofcloth/sewem-ipsum"

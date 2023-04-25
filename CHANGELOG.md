@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Version 3.0.0
+
+- Typescript.
+- Change parameters to accept with underscore *(e.g. `t_min`)* and camel case *(e.g. `tMin`)* on the`v1` endpoint.
+- API now returns JSON with `{ result: ... }` or `{ error: ... }` rather than an array `[...]`
+- Favicon imported into worker rather than loaded from external resource for front-end.
+- Modified front-end to work with new return format.
+
 ## Version 2.0.0
 
 - API v1.

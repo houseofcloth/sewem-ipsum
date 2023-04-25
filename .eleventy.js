@@ -5,6 +5,7 @@ module.exports = function(eleventyConfig) {
 
   // Copy favicon
   eleventyConfig.addPassthroughCopy("site/*.txt")
+  eleventyConfig.addPassthroughCopy("site/favicon.png")
 
   // Minify HTML
   // https://www.11ty.dev/docs/config/#transforms-example-minify-html-output

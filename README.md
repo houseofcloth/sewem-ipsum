@@ -34,13 +34,13 @@ Options for this endpoint:
 - `count`
   > Number of terms to return.    
   > **Limit:** Set via `API_MAX_RETURN`
-- `t_min`
+- `tMin`
   > Minimum number of terms per sentence.
-- `t_max`
+- `tMax`
   > Maximum number of terms per sentence.
-- `s_min`
+- `sMin`
   > Minimum number of sentences *(overrides `count`)*.
-- `s_max`
+- `sMax`
   > Maximum number of sentences *(overrides `count`)*.
 
 ##### Examples
@@ -48,11 +48,11 @@ Options for this endpoint:
   > Return a single paragraph of random length.
 - `{API_BASE}/sentence?count=3`
   > Return three sentences.
-- `{API_BASE}/sentence?count=3&t_min=3&t_max=3`
+- `{API_BASE}/sentence?count=3&tMin=3&tMax=3`
   > Return three sentences each with three terms.
-- `{API_BASE}/sentence?s_min=4&s_max=6`
+- `{API_BASE}/sentence?sMin=4&sMax=6`
   > Return between `4` and `6` sentences.
-- `{API_BASE}/sentence?s_min=4&s_max=6&t_min=4&t_max=6`
+- `{API_BASE}/sentence?sMin=4&sMax=6&tMin=4&tMax=6`
   > Return between `4` and `6` sentences each with `4` to `6` terms.
 
 #### `/paragraph`
@@ -60,9 +60,9 @@ Options for this endpoint:
 - `count`
   > Number of terms to return.    
   > **Limit:** Set via `API_MAX_RETURN`
-- `p_min`
+- `pMin`
   > Minimum number of paragraphs *(overrides `count`)*.
-- `p_max`
+- `pMax`
   > Maximum number of paragraphs *(overrides `count`)*.
 - Plus options available for `/sentence` above.
 
@@ -71,9 +71,9 @@ Options for this endpoint:
   > Return a single paragraph.
 - `{API_BASE}/paragraph?count=3`
   > Return three paragraphs.
-- `{API_BASE}/paragraph?s_min=4&s_max=6`
+- `{API_BASE}/paragraph?sMin=4&sMax=6`
   > Return between `4` and `6` paragraphs.
-- `{API_BASE}/paragraph?count=3&s_min=3&s_max=3&t_min=3&t_max=3`
+- `{API_BASE}/paragraph?count=3&sMin=3&sMax=3&tMin=3&tMax=3`
   > Return three paragraphs, each with three sentences, each with three terms.
 
 ### API v0
